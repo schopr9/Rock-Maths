@@ -19,7 +19,7 @@ export default function Home() {
             <Stack spacing={8} mx={'auto'} py={12} px={6} minW={'xs'}>
                 <Stack align={'center'}>
                     <Heading textAlign="center" fontSize={'4xl'}>
-                        Welcome Captain 🚀
+                        Welcome Olivia 🚀
                     </Heading>
                     <Text fontSize={'lg'}>Choose your adventure</Text>
                 </Stack>

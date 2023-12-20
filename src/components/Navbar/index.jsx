@@ -1,18 +1,18 @@
 import {
     Box,
     Flex,
-    Avatar,
+    // Avatar,
     Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
+    // Menu,
+    // MenuButton,
+    // MenuList,
+    // MenuItem,
+    // MenuDivider,
     useColorModeValue,
     Stack,
     useColorMode,
     Text,
-    Center
+    // Center
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
@@ -24,9 +24,9 @@ export default function Nav() {
     return (
         <>
             <Box bg={useColorModeValue('white', 'gray.800')} px={4}>
-                <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
+                <Flex h={14} alignItems={'center'} justifyContent={'center'}>
                     <Link to="/" aria-label={`Go to the Home Menu`}>
-                        <Text fontWeight={'semibold'}>🚀 Rock-Maths </Text>
+                        <Text fontWeight={'semibold'}>🚀 kindergarten </Text>
                     </Link>
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>
@@ -41,7 +41,7 @@ export default function Nav() {
                             >
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
-                            <Button>
+                            {/* <Button>
                                 <a href="https://github.com/Ayush2966/Rock-Maths"> Github</a>
 
                             </Button>
@@ -79,7 +79,7 @@ export default function Nav() {
                                     <MenuItem>Account Settings</MenuItem>
                                     <MenuItem>Logout</MenuItem>
                                 </MenuList>
-                            </Menu>
+                            </Menu> */}
                         </Stack>
                     </Flex>
                 </Flex>

@@ -2,6 +2,7 @@ import Lottie from 'lottie-react';
 import levelUp from '../../assets/lottie/level-up.json';
 import React, { useEffect, useState, useRef } from 'react';
 import Keypad from '../../components/Keypad';
+import {Input} from '@chakra-ui/react';
 import logic from '../../logic/logic';
 
 import {
@@ -111,7 +112,7 @@ export default function Calculator() {
     useEffect(() => {
         // eslint-disable-next-line
         setSuccess.off();
-    }, [quiz.history]);
+    }, [quiz.history, setSuccess]);
 
     //set focus back to the main flex div so that the keyboard input is automatically detected
     useEffect(() => {
@@ -277,6 +278,9 @@ export default function Calculator() {
                         <Text align="center" fontSize={'xl'}>{`Level Complete`}</Text>
                     </Fade>
                 )}
+                <Collapse in={!isOpen && !levelCleared} animateOpacity>
+                    <Input placeholder='enter numbers' width='auto' backgroundColor={'white'} type='numpad' value={quiz.answerDisplay}/>
+                </Collapse>
                 <Spacer />
                 {/* Keypad */}
                 <Collapse in={isOpen && !levelCleared} animateOpacity>
