@@ -2,7 +2,6 @@ import soloPlay from '../assets/images/play-solo.svg';
 import teamPlay from '../assets/images/play-team.svg';
 
 import { Flex, Stack, Heading, Text, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
-
 import SimpleCard from '../components/SimpleCard';
 import Install from '../components/Install';
 
