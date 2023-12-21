@@ -77,6 +77,17 @@ export default function Learn() {
                             buttonText="Start"
                         />
                     </WrapItem>
+                    <WrapItem>
+                        <SimpleCard
+                            transitionDuration={2}
+                            title="Draw"
+                            progressValue={0}
+                            imageSrc={extremeMode}
+                            bodyText=""
+                            linkTo="/draw"
+                            buttonText="Start"
+                        />
+                    </WrapItem>
                 </Wrap>
             </Stack>
         </Flex>

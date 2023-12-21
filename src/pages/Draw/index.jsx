@@ -1,9 +1,8 @@
 import Lottie from 'lottie-react';
 import levelUp from '../../assets/lottie/level-up.json';
 import React, { useEffect, useState, useRef } from 'react';
-import Keypad from '../../components/Keypad';
-import {Input} from '@chakra-ui/react';
 import logic from '../../logic/logic';
+import Canvas from './Canvas';
 
 import {
     Flex,
@@ -14,25 +13,21 @@ import {
     Spacer,
     Fade,
     Progress,
-    Switch,
     Collapse,
-    useDisclosure,
     Button,
     Badge,
     useBoolean,
     SlideFade,
-    useMediaQuery
 } from '@chakra-ui/react';
 import { ArrowForwardIcon, CheckIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
-export default function Calculator() {
-    const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+export default function Draw() {
     const [success, setSuccess] = useBoolean();
     const [incorrect, setIncorrect] = useBoolean();
     const [levelDone, setLevelDone] = useBoolean();
     const [hint, setHint] = useBoolean();
     const inputRef = useRef(null);
-    const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
+    const clearCanvas = useRef(null);
 
     const [quiz, setQuiz] = useState({
         level: '1',
@@ -56,10 +51,10 @@ export default function Calculator() {
             mulitplier: 0
         },
 
-        question: ['5', '+', '3'],
-        answerCorrect: '8',
+        question: ['a'],
+        answerCorrect: 'a',
         answerDisplay: 'Ready?',
-        totalSteps: 100,
+        totalSteps: 26,
 
         history: [
             {
@@ -102,6 +97,10 @@ export default function Calculator() {
             setHint.off();
             setQuiz(newQuiz);
         }
+
+        if (clearCanvas?.current) {
+            clearCanvas.current.clearCanvas();
+        }
     }
 
     const handleUpgradeLevel = () => {
@@ -124,10 +123,6 @@ export default function Calculator() {
 
     const answerTextColor = useColorModeValue(success && 'green.500', success && 'green.400');
     const questionColor = useColorModeValue('gray.700', 'gray.300');
-    const answerTextShadow = useColorModeValue(
-        '0px 0px 2px rgba(255,255,255,0.1)',
-        '0px 0px 2px rgba(255,255,255,0.4)'
-    );
 
     /* 
         !!! New Feature 
@@ -247,7 +242,7 @@ export default function Calculator() {
                 {/* Question */}
                 {!levelCleared && (
                     <Fade in transition={{ enter: { duration: 0.5, delay: 1 } }}>
-                        <Text fontSize={'5xl'} color={questionColor} textAlign="center">
+                        <Text fontSize={'5xl'} color={questionColor} textAlign="center" fontFamily={"cursive"}>
                             {quiz.question}
                         </Text>
                     </Fade>
@@ -256,13 +251,19 @@ export default function Calculator() {
                 <Spacer />
                 {!levelCleared && (
                     <Fade in transition={{ enter: { duration: 0.5 } }}>
-                        <Text
-                            fontSize={'7xl'}
-                            color={answerTextColor}
-                            textShadow={answerTextShadow}
-                        >
-                            {!quiz.answerDisplay[0] ? '?' : quiz.answerDisplay}
-                        </Text>
+                        {/*/ how to trigger the canvas to clear */}
+
+                        <Canvas ref={clearCanvas} />
+                        <HStack justifyContent={'end'}>
+                        <Button
+                                rightIcon={<ArrowForwardIcon />}
+                                colorScheme="purple"
+                                variant="solid"
+                                onClick={updateQuiz}
+                            >
+                                Next
+                        </Button>
+                            </HStack>
                     </Fade>
                 )}
 
@@ -273,32 +274,13 @@ export default function Calculator() {
                             align="center"
                             fontWeight={'semibold'}
                             fontSize={'3xl'}
-                        >{`Good Job, Captain! 👏`}</Text>
+                        >{`Good Job, Olivia! 👏`}</Text>
                         <Lottie animationData={levelUp} loop={true} style={{ width: 300 }} />
                         <Text align="center" fontSize={'xl'}>{`Level Complete`}</Text>
                     </Fade>
                 )}
-                <Collapse in={!isOpen && !levelCleared} >
-                    <Input placeholder='enter numbers' width='auto' backgroundColor={'white'} type='numpad' value={quiz.answerDisplay}/>
-                </Collapse>
                 <Spacer />
-                {/* Keypad */}
-                <Collapse in={isOpen && !levelCleared} >
-                    <Keypad upadateQuiz={updateQuiz} />
-                </Collapse>
                 {/* Hide the toggle button if the display is on mobile */}
-                {isLargerThan640 && (
-                    <HStack>
-                        <Text fontWeight={'semibold'} fontSize={'xs'}>
-                            Keypad
-                        </Text>
-                        <Switch
-                            onChange={onToggle}
-                            colorScheme={'purple'}
-                            isDisabled={levelCleared}
-                        />
-                    </HStack>
-                )}
                 {/* Action */}
                 {levelCleared && (
                     <Fade in={levelCleared} transition={{ enter: { delay: 1, duration: 0.5 } }}>

@@ -4,6 +4,7 @@ import teamPlay from '../assets/images/play-team.svg';
 import { Flex, Stack, Heading, Text, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
 
 import SimpleCard from '../components/SimpleCard';
+import Install from '../components/Install';
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
             )}
         >
             <Stack spacing={8} mx={'auto'} py={12} px={6} minW={'xs'}>
+                <Install />
                 <Stack align={'center'}>
                     <Heading textAlign="center" fontSize={'4xl'}>
                         Welcome Olivia 🚀

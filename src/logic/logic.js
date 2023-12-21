@@ -74,5 +74,14 @@ export default function logic(quiz, keyPress) {
     }
     //    ---> 10. When the keypress is not a Number or Del or .
     //             it just sends back the original object without any changes
+    else if (keyPress?.target?.type === 'button') {
+        // console.log(keyPress.target.value);
+        // how to update the question here with next char c
+        // how to get b from a in javascript 
+        const prev = (quiz.question[0].charCodeAt(0)) + 1;
+        const question = [String.fromCharCode(prev)]
+        newQuiz = { ...newQuiz, question, history: [...quiz.history, {question}] };
+        return { ...newQuiz };
+    }
     else return { ...newQuiz };
 }
