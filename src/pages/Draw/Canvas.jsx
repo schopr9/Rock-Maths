@@ -62,6 +62,11 @@ const Canvas = forwardRef((props, ref) => {
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
+          onTouchCancel={stopDrawing}
+          onTouchLeave={stopDrawing}
           onMouseOut={stopDrawing}
           width={500}
           height={500}
